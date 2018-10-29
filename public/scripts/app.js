@@ -1,114 +1,74 @@
-'use strict';
+"use strict";
 
 console.log('App.js is Running');
 
 // JSX - JavaScript XML
+
+var app = {
+  title: "Decision Maker App",
+  subtitle: "Take the stress out of making choices"
+};
 var template = React.createElement(
-  'div',
+  "div",
   null,
   React.createElement(
-    'h1',
+    "h1",
     null,
-    'Indecision App'
+    app.title
   ),
   React.createElement(
-    'p',
+    "h2",
     null,
-    'This is some info'
+    app.subtitle
   ),
   React.createElement(
-    'ol',
+    "ol",
     null,
     React.createElement(
-      'li',
+      "li",
       null,
-      'Item One'
+      "Item One"
     ),
     React.createElement(
-      'li',
+      "li",
       null,
-      'Item Two'
+      "Item Two"
     )
   )
 ); //wrapping parantheses only needed to help organize
 
+
+//Object and properties
+var user = {
+  name: 'Fleet',
+  age: '19',
+  location: 'Baltimore'
+};
+
 var newTemplate = React.createElement(
-  'div',
+  "div",
   null,
   React.createElement(
-    'h1',
+    "h1",
     null,
-    'Dale Greve'
+    user.name + '!'
   ),
   React.createElement(
-    'p',
+    "p",
     null,
-    'Age: 44'
+    "Age: ",
+    user.age
   ),
   React.createElement(
-    'p',
+    "p",
     null,
-    'Location: Troy'
+    "Location: ",
+    user.location
   )
 );
 
-var appRoot = document.getElementById('app');
+var appTemp = document.getElementById('app');
+var appRoot = document.getElementById('appTwo');
 
-ReactDOM.render(newTemplate, appRoot);
-'use strict';
-
-console.log('App.js is Running');
-
-// JSX - JavaScript XML
-var template = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    'Indecision App'
-  ),
-  React.createElement(
-    'p',
-    null,
-    'This is some info'
-  ),
-  React.createElement(
-    'ol',
-    null,
-    React.createElement(
-      'li',
-      null,
-      'Item One'
-    ),
-    React.createElement(
-      'li',
-      null,
-      'Item Two'
-    )
-  )
-); //wrapping parantheses only needed to help organize
-
-var newTemplate = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    'Dale Greve'
-  ),
-  React.createElement(
-    'p',
-    null,
-    'Age: 44'
-  ),
-  React.createElement(
-    'p',
-    null,
-    'Location: Troy'
-  )
-);
-
-var appRoot = document.getElementById('app');
-
+ReactDOM.render(template, appTemp);
 ReactDOM.render(newTemplate, appRoot);
