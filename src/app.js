@@ -1,17 +1,19 @@
 console.log('App.js is Running');
 
-// JSX - JavaScript XML
+// JSX - JavaScript XML requires Babel 
+// babel src/app.js --out-file=public/scripts/app.js --presets=env, react --watch
+
 //if statements
 //ternary operators
 //logical and operator
 
-var app = {
+const app = {
   title: "Decision Maker App",
   subtitle: "Take the stress out of making choices",
   options: ['One', 'Two']
 }
 
-var template = (
+const template = (
   <div>
     <h1>{app.title}</h1>
     {app.subtitle && <h2>{app.subtitle}</h2>}
@@ -21,13 +23,14 @@ var template = (
     <ol>
       <li>Item One</li>
       <li>Item Two</li>
+      <li>Item Three</li>
     </ol>
   </div>
 );//wrapping Parenthesis only needed to help organize
 
 
 //Object and properties
-var user = {
+const user = {
   name: 'Scat Cat',
   age: '27',
   location: 'Alley'
@@ -44,7 +47,7 @@ function getLocation(location) {
 //the brackets are know as js expressions
 // ternary operator is used to test if name exists
 // logical and operator is used on age - test if there and if over 18
-var newTemplate = (
+const newTemplate = (
   <div>
     <h1>{user.name ? user.name : 'Anonymous'}</h1>
     {(user.age >= 18) && <p> Age: {user.age}</p>}
@@ -52,8 +55,8 @@ var newTemplate = (
   </div >
 );
 
-var appTemp = document.getElementById('app');
-var appRoot = document.getElementById('appTwo');
+const appTemp = document.getElementById('app');
+const appRoot = document.getElementById('appTwo');
 
 ReactDOM.render(template, appTemp);
 ReactDOM.render(newTemplate, appRoot);
