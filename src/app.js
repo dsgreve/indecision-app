@@ -29,6 +29,39 @@ const template = (
 );//wrapping Parenthesis only needed to help organize
 
 
+
+
+
+//let is used because var count will change
+let count = 0;
+const addOne = () => {
+
+};
+//css class is renamed to className in JSX because class is a js reserved word
+const templateTwo = (
+  <div>
+    <h1>Count: {count}</h1>
+    <button onClick={}>+1</button>
+  </div>
+);
+console.log(templateTwo);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Object and properties
 const user = {
   name: 'Scat Cat',
@@ -59,4 +92,4 @@ const appTemp = document.getElementById('app');
 const appRoot = document.getElementById('appTwo');
 
 ReactDOM.render(template, appTemp);
-ReactDOM.render(newTemplate, appRoot);
+ReactDOM.render(templateTwo, appRoot);
