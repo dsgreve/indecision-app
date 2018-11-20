@@ -35,61 +35,46 @@ const template = (
 //let is used because var count will change
 let count = 0;
 const addOne = () => {
-
+  count++;
+  renderCounterApp();
+  console.log('addOne', count)
 };
-//css class is renamed to className in JSX because class is a js reserved word
-const templateTwo = (
-  <div>
-    <h1>Count: {count}</h1>
-    <button onClick={}>+1</button>
-  </div>
-);
-console.log(templateTwo);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Object and properties
-const user = {
-  name: 'Scat Cat',
-  age: '27',
-  location: 'Alley'
+const minusOne = () => {
+  count--;
+  renderCounterApp();
+  console.log('minusOne', count)
 };
-//calling a function is an expression
-function getLocation(location) {
-  if (location) {
-    return <p>Location: {location}</p>;
-  } else {
-    return undefined; //could remove the else and return because undefined is implicit
-  }
 
+const resetCount = () => {
+  count = 0;
+  renderCounterApp();
+  console.log('resetCount', count)
 }
-//the brackets are know as js expressions
-// ternary operator is used to test if name exists
-// logical and operator is used on age - test if there and if over 18
-const newTemplate = (
-  <div>
-    <h1>{user.name ? user.name : 'Anonymous'}</h1>
-    {(user.age >= 18) && <p> Age: {user.age}</p>}
-    {getLocation(user.location)}
-  </div >
-);
+//css class is renamed to className in JSX because class is a js reserved word
+
+
+//Make button minus One and register
+//Make button reset "rest" fire setup reset.
+
+
 
 const appTemp = document.getElementById('app');
 const appRoot = document.getElementById('appTwo');
 
 ReactDOM.render(template, appTemp);
-ReactDOM.render(templateTwo, appRoot);
+
+const renderCounterApp = () => {
+  const templateTwo = (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={addOne}>+1</button>&nbsp;
+    <button onClick={minusOne}>-1</button>&nbsp;
+    <button onClick={resetCount}>reset</button>
+    </div>
+  );
+  ReactDOM.render(templateTwo, appRoot);
+
+};
+
+renderCounterApp();
