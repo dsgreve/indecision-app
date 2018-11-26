@@ -10,111 +10,106 @@ console.log('App.js is Running');
 //logical and operator
 
 var app = {
-  title: "Decision Maker App",
+  title: "Decision Maker Application",
   subtitle: "Take the stress out of making choices",
-  options: ['One', 'Two']
+  options: []
 };
 
-var template = React.createElement(
-  "div",
-  null,
-  React.createElement(
-    "h1",
-    null,
-    app.title
-  ),
-  app.subtitle && React.createElement(
-    "h2",
-    null,
-    app.subtitle
-  ),
-  React.createElement(
-    "p",
-    null,
-    app.options.length > 0 ? 'Here are your options son' : 'You have no options son'
-  ),
-  React.createElement(
-    "ol",
-    null,
-    React.createElement(
-      "li",
-      null,
-      "Item One"
-    ),
-    React.createElement(
-      "li",
-      null,
-      "Item Two"
-    ),
-    React.createElement(
-      "li",
-      null,
-      "Item Three"
-    )
-  )
-); //wrapping Parenthesis only needed to help organize
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault();
 
+  var option = e.target.elements.option.value;
 
-//let is used because var count will change
-var count = 0;
-var addOne = function addOne() {
-  count++;
-  renderCounterApp();
-  console.log('addOne', count);
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+  } else {
+    alert('Please enter an option');
+  }
+  renderFormEntry();
 };
 
-var minusOne = function minusOne() {
-  count--;
-  renderCounterApp();
-  console.log('minusOne', count);
+//create remove all button
+//onclick handler removes all options
+
+var wipeArray = function wipeArray() {
+  if (app.options != '') {
+    app.options = [];
+    console.log(app.options);
+    renderFormEntry();
+  } else {
+    alert('Nothing to remove');
+  }
 };
 
-var resetCount = function resetCount() {
-  count = 0;
-  renderCounterApp();
-  console.log('resetCount', count);
+var onMakeDecision = function onMakeDecision() {
+  var randomNum = Math.floor(Math.random() * app.options.length);
+  var option = app.options[randomNum];
+  alert(option);
 };
-//css class is renamed to className in JSX because class is a js reserved word
 
-
-//Make button minus One and register
-//Make button reset "rest" fire setup reset.
-
-
-var appTemp = document.getElementById('app');
 var appRoot = document.getElementById('appTwo');
 
-ReactDOM.render(template, appTemp);
+{/* const numbers = [55, 101, 1000] */}
 
-var renderCounterApp = function renderCounterApp() {
-  var templateTwo = React.createElement(
+var renderFormEntry = function renderFormEntry() {
+  var template = React.createElement(
     "div",
     null,
     React.createElement(
       "h1",
       null,
-      "Count: ",
-      count
+      app.title
+    ),
+    app.subtitle && React.createElement(
+      "h2",
+      null,
+      app.subtitle
+    ),
+    React.createElement(
+      "p",
+      null,
+      app.options.length > 0 ? 'Here are your options' : 'You have no options son'
+    ),
+    React.createElement(
+      "p",
+      null,
+      app.options.length
     ),
     React.createElement(
       "button",
-      { onClick: addOne },
-      "+1"
+      { disabled: app.options.length === 0, onClick: onMakeDecision },
+      "What should I do?"
     ),
-    "\xA0",
     React.createElement(
       "button",
-      { onClick: minusOne },
-      "-1"
+      { onClick: wipeArray },
+      "Remove Options"
     ),
-    "\xA0",
     React.createElement(
-      "button",
-      { onClick: resetCount },
-      "reset"
+      "ol",
+      null,
+      app.options.map(function (option) {
+        return React.createElement(
+          "li",
+          { key: option },
+          " Would you like to ",
+          option
+        );
+      })
+    ),
+    React.createElement(
+      "form",
+      { onSubmit: onFormSubmit },
+      React.createElement("input", { type: "text", name: "option" }),
+      React.createElement(
+        "button",
+        null,
+        "Add Option"
+      )
     )
-  );
-  ReactDOM.render(templateTwo, appRoot);
-};
+  ); //wrapping Parenthesis only needed to help organize
 
-renderCounterApp();
+  ReactDOM.render(template, appRoot);
+};
+renderFormEntry();

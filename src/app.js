@@ -8,73 +8,85 @@ console.log('App.js is Running');
 //logical and operator
 
 const app = {
-  title: "Decision Maker App",
+  title: "Decision Maker Application",
   subtitle: "Take the stress out of making choices",
-  options: ['One', 'Two']
+  options: []
 }
 
-const template = (
-  <div>
-    <h1>{app.title}</h1>
-    {app.subtitle && <h2>{app.subtitle}</h2>}
-    <p>{app.options.length > 0 ? 'Here are your options son' : 'You have no options son'}</p>
 
 
-    <ol>
-      <li>Item One</li>
-      <li>Item Two</li>
-      <li>Item Three</li>
-    </ol>
-  </div>
-);//wrapping Parenthesis only needed to help organize
+const onFormSubmit = (e) => {
+  e.preventDefault();
 
+  const option = e.target.elements.option.value;
 
-
-
-
-//let is used because var count will change
-let count = 0;
-const addOne = () => {
-  count++;
-  renderCounterApp();
-  console.log('addOne', count)
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+  } else {
+    alert('Please enter an option');
+  }
+  renderFormEntry();
 };
 
-const minusOne = () => {
-  count--;
-  renderCounterApp();
-  console.log('minusOne', count)
+//create remove all button
+//onclick handler removes all options
+
+const wipeArray = () => {
+  if (app.options != '') {
+    app.options = [];
+    console.log(app.options);
+    renderFormEntry();
+  } else {
+    alert('Nothing to remove')
+  }
+
 };
 
-const resetCount = () => {
-  count = 0;
-  renderCounterApp();
-  console.log('resetCount', count)
-}
-//css class is renamed to className in JSX because class is a js reserved word
+const onMakeDecision = () => {
+  const randomNum = Math.floor(Math.random() * app.options.length);
+  const option = app.options[randomNum];
+  alert(option);
+};
 
-
-//Make button minus One and register
-//Make button reset "rest" fire setup reset.
-
-
-
-const appTemp = document.getElementById('app');
 const appRoot = document.getElementById('appTwo');
 
-ReactDOM.render(template, appTemp);
+{/* const numbers = [55, 101, 1000] */ }
 
-const renderCounterApp = () => {
-  const templateTwo = (
+const renderFormEntry = () => {
+  const template = (
     <div>
-      <h1>Count: {count}</h1>
-      <button onClick={addOne}>+1</button>&nbsp;
-    <button onClick={minusOne}>-1</button>&nbsp;
-    <button onClick={resetCount}>reset</button>
+      <h1>{app.title}</h1>
+      {app.subtitle && <h2>{app.subtitle}</h2>}
+      <p>{app.options.length > 0 ? 'Here are your options' : 'You have no options son'}</p>
+      <p>{app.options.length}</p>
+      <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
+      <button onClick={wipeArray}>Remove Options</button>
+
+      {
+        /*
+        numbers.map((number) => {
+          return <p key={number}>Number: {number}</p>
+        })
+        */
+      }
+
+      <ol>
+        {/* Comment in JSX */}
+        {
+          app.options.map((option) => {
+            return <li key={option}> Would you like to {option}</li>
+          })
+        }
+      </ol>
+      <form onSubmit={onFormSubmit}>
+        <input type="text" name="option" />
+        <button>Add Option</button>
+      </form>
     </div>
-  );
-  ReactDOM.render(templateTwo, appRoot);
 
+  );//wrapping Parenthesis only needed to help organize
+
+  ReactDOM.render(template, appRoot);
 };
-
-renderCounterApp();
+renderFormEntry();
