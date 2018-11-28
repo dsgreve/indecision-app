@@ -1,16 +1,18 @@
 const toggleApp = {
     title: "Visibility Toggle",
-    details: "Hey! These are some details you can now see!",
+    details: [],
     buttonText: ['Show Details', 'Hide Details']
 }
-
-
-
-
-let buttonText = toggleApp.buttonText[0];
+let myButtonText = toggleApp.buttonText[0];
 
 const toggleInfo = () => {
-    let buttonText = toggleApp.buttonText[1];
+    if (toggleApp.details == '') {
+        toggleApp.details = ["Hey! These are some details you can now see!"];
+        myButtonText = toggleApp.buttonText[1];
+    } else {
+        toggleApp.details = [];
+        myButtonText = toggleApp.buttonText[0];
+    }
     render();
 };
 
@@ -20,7 +22,7 @@ const render = () => {
     const template = (
         <div>
             <h1>{toggleApp.title}</h1>
-            <button onClick={toggleInfo}>{buttonText}</button>
+            <button onClick={toggleInfo}>{myButtonText}</button>
             <p>{toggleApp.details}</p>
         </div>
     )
