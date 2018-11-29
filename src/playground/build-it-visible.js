@@ -1,18 +1,11 @@
 const toggleApp = {
     title: "Visibility Toggle",
-    details: [],
-    buttonText: ['Show Details', 'Hide Details']
 }
-let myButtonText = toggleApp.buttonText[0];
 
-const toggleInfo = () => {
-    if (toggleApp.details == '') {
-        toggleApp.details = ["Hey! These are some details you can now see!"];
-        myButtonText = toggleApp.buttonText[1];
-    } else {
-        toggleApp.details = [];
-        myButtonText = toggleApp.buttonText[0];
-    }
+let visibility = false;
+
+const toggleVisibility = () => {
+    visibility = !visibility; //this toggles boolean
     render();
 };
 
@@ -22,13 +15,16 @@ const render = () => {
     const template = (
         <div>
             <h1>{toggleApp.title}</h1>
-            <button onClick={toggleInfo}>{myButtonText}</button>
-            <p>{toggleApp.details}</p>
+            <button onClick={toggleVisibility}>{visibility ? 'Hide Details' : 'Show Details'}</button>
+            { /* test if visibilty is true*/}
+            {visibility && (
+                <div>
+                    <p>Hey. These are some details you can now see.</p>
+                </div>
+            )}
         </div>
     )
     ReactDOM.render(template, appRoot);
 };
 
 render();
-
-
