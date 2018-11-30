@@ -19,8 +19,30 @@ class Person {
     }
 
 }
+/** super refers to the parent  */
+class Student extends Person {
+    constructor(name, age, major) {
+        super(name, age)
+        this.major = major;
+    }
+    hasMajor() {
+        return !!this.major;
+        //!! flips this to be a true/false statement
+    }
+    getDescription() {
+        let description = super.getDescription();
 
-const me = new Person('Scott', 50);
+        if (this.hasMajor) {
+            description += ` Their major is ${this.major}`;
+        }
+        return description;
+    }
+}
+
+/* Because Student extends Person we call access Person properties by calling Student */
+const me = new Student('Scott', 50, 'Computer Science');
+
 console.log(me.getDescription());
-const other = new Person();
-console.log(other.getGreeting());
+
+const other = new Student();
+console.log(other.getDescription());
