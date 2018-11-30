@@ -6,16 +6,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //when working with classes its common to capitalize the first letter
 /* Define Constructor function in class to access data - no comma after closing curly brace */
+
+/* setup constructor to take name and age - default to 0 */
+/* setup method to get description - Name is age years old */
 var Person = function () {
     function Person() {
         var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Anonymous';
+        var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '0';
 
         _classCallCheck(this, Person);
 
         this.name = name;
+        this.age = age;
     }
 
     _createClass(Person, [{
+        key: 'getDescription',
+        value: function getDescription() {
+            return this.name + ' is ' + this.age + ' years old.';
+        }
+    }, {
         key: 'getGreeting',
         value: function getGreeting() {
             // return 'Hi! I am ' + this.name + '!'; -- ES 5 method 
@@ -26,7 +36,7 @@ var Person = function () {
     return Person;
 }();
 
-var me = new Person('Scott');
-console.log(me.getGreeting());
+var me = new Person('Scott', 50);
+console.log(me.getDescription());
 var other = new Person();
 console.log(other.getGreeting());
