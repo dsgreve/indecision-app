@@ -11,13 +11,9 @@ class Person {
     }
 
     getDescription() {
-        return `${this.name} is ${this.age} years old.`
+        return `Hi I am ${this.name}. I am ${this.age} years old.`
     }
-    getGreeting() {
-        // return 'Hi! I am ' + this.name + '!'; -- ES 5 method 
-        return `Hi. I am ${this.name} !`; // ES6 template string
-    }
-
+   
 }
 /** super refers to the parent  */
 class Student extends Person {
@@ -33,16 +29,37 @@ class Student extends Person {
         let description = super.getDescription();
 
         if (this.hasMajor) {
-            description += ` Their major is ${this.major}`;
+            description += ` My major is ${this.major}.`;
+        }
+        return description;
+    }
+}
+
+//Add support for homeLocation
+//Override getGreeting
+//1. Hi I am scott greve.  I am visting from Detrtoit
+//2. No location just just Parent string
+
+class Traveler extends Person {
+    constructor(name, age, homeLocation) {
+        super(name, age);
+        this.homeLocation = homeLocation;
+    }
+
+    getDescription(){
+        let description = super.getDescription();
+        
+        if(this.homeLocation) {
+            description += ` I am visiting from ${this.homeLocation}.`;
         }
         return description;
     }
 }
 
 /* Because Student extends Person we call access Person properties by calling Student */
-const me = new Student('Scott', 50, 'Computer Science');
+const me = new Traveler('Scott', 50, 'Detroit');
 
 console.log(me.getDescription());
 
-const other = new Student();
+const other = new Traveler();
 console.log(other.getDescription());

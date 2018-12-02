@@ -29,13 +29,7 @@ var Person = function () {
     _createClass(Person, [{
         key: 'getDescription',
         value: function getDescription() {
-            return this.name + ' is ' + this.age + ' years old.';
-        }
-    }, {
-        key: 'getGreeting',
-        value: function getGreeting() {
-            // return 'Hi! I am ' + this.name + '!'; -- ES 5 method 
-            return 'Hi. I am ' + this.name + ' !'; // ES6 template string
+            return 'Hi I am ' + this.name + '. I am ' + this.age + ' years old.';
         }
     }]);
 
@@ -68,7 +62,7 @@ var Student = function (_Person) {
             var description = _get(Student.prototype.__proto__ || Object.getPrototypeOf(Student.prototype), 'getDescription', this).call(this);
 
             if (this.hasMajor) {
-                description += ' Their major is ' + this.major;
+                description += ' My major is ' + this.major + '.';
             }
             return description;
         }
@@ -77,12 +71,44 @@ var Student = function (_Person) {
     return Student;
 }(Person);
 
+//Add support for homeLocation
+//Override getGreeting
+//1. Hi I am scott greve.  I am visting from Detrtoit
+//2. No location just just Parent string
+
+var Traveler = function (_Person2) {
+    _inherits(Traveler, _Person2);
+
+    function Traveler(name, age, homeLocation) {
+        _classCallCheck(this, Traveler);
+
+        var _this2 = _possibleConstructorReturn(this, (Traveler.__proto__ || Object.getPrototypeOf(Traveler)).call(this, name, age));
+
+        _this2.homeLocation = homeLocation;
+        return _this2;
+    }
+
+    _createClass(Traveler, [{
+        key: 'getDescription',
+        value: function getDescription() {
+            var description = _get(Traveler.prototype.__proto__ || Object.getPrototypeOf(Traveler.prototype), 'getDescription', this).call(this);
+
+            if (this.homeLocation) {
+                description += ' I am visiting from ' + this.homeLocation + '.';
+            }
+            return description;
+        }
+    }]);
+
+    return Traveler;
+}(Person);
+
 /* Because Student extends Person we call access Person properties by calling Student */
 
 
-var me = new Student('Scott', 50, 'Computer Science');
+var me = new Traveler('Scott', 50, 'Detroit');
 
 console.log(me.getDescription());
 
-var other = new Student();
+var other = new Traveler();
 console.log(other.getDescription());
