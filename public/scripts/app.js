@@ -187,6 +187,11 @@ var Option = function (_React$Component5) {
   return Option;
 }(React.Component);
 
+//1. Setup Form with Text input and submit
+//2. wire up onSubmit
+//3. handleAddOption -> fetch value typed -> if exists then alert
+
+
 var AddOption = function (_React$Component6) {
   _inherits(AddOption, _React$Component6);
 
@@ -197,12 +202,34 @@ var AddOption = function (_React$Component6) {
   }
 
   _createClass(AddOption, [{
+    key: 'handleAddOption',
+    value: function handleAddOption(e) {
+      e.preventDefault();
+
+      var option = e.target.elements.option.value;
+
+      if (option) {
+        alert(option);
+      } else {
+        alert('Please enter some input');
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
         'div',
         null,
-        'AddOption component here'
+        React.createElement(
+          'form',
+          { onSubmit: this.handleAddOption },
+          React.createElement('input', { type: 'text', name: 'option' }),
+          React.createElement(
+            'button',
+            null,
+            'Add Option'
+          )
+        )
       );
     }
   }]);
