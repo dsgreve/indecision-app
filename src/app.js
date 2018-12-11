@@ -44,13 +44,19 @@ class Action extends React.Component {
 }
 
 class Options extends React.Component {
+  //keeps binding rendered from beginning so it does not need to be bound inline each time
+  constructor(props) {
+    super(props);
+    this.handleRemoveAll = this.handleRemoveAll.bind(this);
+  }
   handleRemoveAll() {
-    alert('Are you sure you want to Remove all options');
+    console.log(this.props.options);
+    //alert('Are you sure you want to Remove all options');
   }
   render() {
     return (
       <div>
-        <button onClick={this.handleRemoveAll}>Remove all</button>
+        <button onClick={this.handleRemoveAlls}>Remove all</button>
         {
           this.props.options.map((optionArg) => <p key={optionArg}>{optionArg}</p>)
         }
@@ -87,16 +93,16 @@ class Option extends React.Component {
 class AddOption extends React.Component {
   handleAddOption(e) {
     e.preventDefault();
-  
+
     const option = e.target.elements.option.value;
-  
-    if(option) {
+
+    if (option) {
       alert(option);
     } else {
-    alert('Please enter some input')
+      alert('Please enter some input')
     }
   }
-  
+
   render() {
     return (
       <div>
@@ -104,11 +110,11 @@ class AddOption extends React.Component {
           <input type="text" name="option" />
           <button>Add Option</button>
         </form>
-        
+
       </div>
     );
   }
-  
+
 }
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
